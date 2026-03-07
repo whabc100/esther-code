@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(find /home/xing/xing_claude/esther-code -type f -name \"*\" 2>/dev/null | head -20)",
+      "Bash(python3 -m pip install -r requirements.txt --quiet)",
+      "Bash(python3 -c \"import rich, pydantic, dotenv, loguru\" 2>&1)",
+      "Bash(python3 -m py_compile /home/xing/xing_claude/esther-code/src/main.py /home/xing/xing_claude/esther-code/src/config.py /home/xing/xing_claude/esther-code/src/models/message.py /home/xing/xing_claude/esther-code/src/models/tools.py /home/xing/xing_claude/esther-code/src/client/async_client.py /home/xing/xing_claude/esther-code/src/client/stream_handler.py /home/xing/xing_claude/esther-code/src/tools/registry.py /home/xing/xing_claude/esther-code/src/tools/executor.py /home/xing/xing_claude/esther-code/src/tools/builtin/file_ops.py /home/xing/xing_claude/esther-code/src/tools/builtin/search.py /home/xing/xing_claude/esther-code/src/ui/formatter.py /home/xing/xing_claude/esther-code/src/ui/cli.py 2>&1)",
+      "Bash(git init)"
+    ]
+  }
+}

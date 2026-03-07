@@ -1,0 +1,19 @@
+# GLM-4.7 SDK
+zhipuai>=1.0.0
+
+# CLI和UI
+rich>=13.0.0
+prompt-toolkit>=3.0.0
+
+# 数据验证
+pydantic>=2.0.0
+python-dotenv>=1.0.0
+
+# 日志
+loguru>=0.7.0
+
+# 文件搜索
+pathspec>=0.11.0
+
+# 异步支持
+aiohttp>=3.9.0
