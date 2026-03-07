@@ -11,8 +11,7 @@ from prompt_toolkit.styles import Style
 from loguru import logger
 
 from ..config import get_config
-from ..models.message import Message, MessageRole, Conversation
-from ..models.tools import ToolCall
+from ..models.message import Message, MessageRole, Conversation, ToolCall
 from ..client.async_client import GLMAsyncClient, get_client
 from ..tools.registry import ToolRegistry, get_registry
 from ..tools.executor import ToolExecutor, get_executor
