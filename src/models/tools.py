@@ -49,7 +49,7 @@ class ToolResult(BaseModel):
     """工具执行结果"""
 
     success: bool = Field(description="是否成功")
-    data: Any = Field(description="返回数据")
+    data: Any = Field(default=None, description="返回数据")
     error: Optional[str] = Field(default=None, description="错误信息")
     tool_name: str = Field(description="工具名称")
 
