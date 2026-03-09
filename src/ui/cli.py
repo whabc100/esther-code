@@ -63,8 +63,7 @@ class CLI:
 
         # 初始化提示会话
         self.session = PromptSession(
-            history=FileHistory(".esther_history"),
-            auto_suggest=True
+            history=FileHistory(".esther_history")
         )
 
         # 设置样式
