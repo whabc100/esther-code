@@ -1,6 +1,6 @@
 """工具注册表模块"""
 
-from typing import Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional, Set
 from loguru import logger
 
 from ..models.tools import Tool, ToolDefinition
