@@ -17,6 +17,7 @@ from ..tools.registry import ToolRegistry, get_registry
 from ..tools.executor import ToolExecutor, get_executor
 from ..tools.builtin.file_ops import register_builtin_tools
 from ..tools.builtin.search import register_builtin_search_tools
+from ..tools.builtin.web_search import register_web_search_tools
 from .formatter import StreamingFormatter
 
 
@@ -101,6 +102,7 @@ class CLI:
             # 注册内置工具
             register_builtin_tools(self.registry)
             register_builtin_search_tools(self.registry)
+            register_web_search_tools(self.registry)
 
         # 初始化执行器
         if self.executor is None:
