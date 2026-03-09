@@ -73,16 +73,13 @@ def init_config(env_file: Optional[str] = None) -> Settings:
     Returns:
         Settings: 配置实例
     """
-    global _settings
-
     if env_file:
         load_dotenv(env_file)
     else:
         # 尝试加载 .env 文件
         load_dotenv()
 
-    _settings = Settings()
-    return _settings
+    return Settings()
 
 
 def get_config() -> Settings:
@@ -108,5 +105,6 @@ def reload_config() -> Settings:
         Settings: 新的配置实例
     """
     global _settings
-    _settings = init_config()
-    return _settings
+    settings = init_config()
+    _settings = settings
+    return settings
