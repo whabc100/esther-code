@@ -92,6 +92,7 @@ def get_config() -> Settings:
     Raises:
         RuntimeError: 如果配置未初始化
     """
+    global _settings
     if _settings is None:
         _settings = init_config()
     return _settings
