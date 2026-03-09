@@ -160,7 +160,8 @@ class CLI:
         """
         try:
             result = await self.session.prompt_async(
-                HTML("<ansiblue bold>user</ansiblue bold>: "),
+                "user: ",
+                style=self.style,
                 key_bindings=self.key_bindings
             )
             return result.strip()
