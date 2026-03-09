@@ -148,7 +148,7 @@ class CLI:
         """显示欢迎信息"""
         self.formatter.header("Esther Code v0.1.0")
         self.formatter.separator()
-        self.formatter.info("输入 /help 查看帮助，输入 /exit 退出")
+        self.formatter.format_info("输入 /help 查看帮助，输入 /exit 退出")
         self.formatter.separator()
 
     async def _get_input(self) -> str:
@@ -184,20 +184,20 @@ class CLI:
             self.formatter.help()
         elif cmd == "/clear":
             self.conversation.clear()
-            self.formatter.success("对话历史已清空")
+            self.formatter.format_success("对话历史已清空")
         elif cmd == "/tools":
             await self._list_tools()
         elif cmd == "/config":
             self._show_config()
         else:
-            self.formatter.warning(f"未知命令: {command}")
+            self.formatter.format_warning(f"未知命令: {command}")
 
     async def _list_tools(self) -> None:
         """列出可用工具"""
         tools = self.registry.get_enabled()
 
         if not tools:
-            self.formatter.info("没有可用工具")
+            self.formatter.format_info("没有可用工具")
             return
 
         table_data = []
@@ -296,7 +296,7 @@ class CLI:
 
         except Exception as e:
             logger.error(f"对话处理错误: {e}")
-            self.formatter.error(f"发生错误: {e}")
+            self.formatter.format_error(f"发生错误: {e}")
 
     async def _execute_tool_calls(self, tool_calls: List[ToolCall]) -> None:
         """
@@ -305,7 +305,7 @@ class CLI:
         Args:
             tool_calls: 工具调用列表
         """
-        self.formatter.info(f"执行 {len(tool_calls)} 个工具调用...")
+        self.formatter.format_info(f"执行 {len(tool_calls)} 个工具调用...")
 
         # 逐个执行工具
         for tool_call in tool_calls:
