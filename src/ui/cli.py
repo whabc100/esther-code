@@ -257,6 +257,8 @@ class CLI:
 
             # 获取累积的工具调用（从客户端的 stream_handler）
             tool_calls_data = self.client._stream_handler.get_tool_calls()
+            tool_calls: Optional[List[ToolCall]] = None
+
             if tool_calls_data:
                 # 转换为 ToolCall 对象列表
                 tool_calls = [
