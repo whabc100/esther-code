@@ -240,7 +240,6 @@ class CLI:
 
             # 调用 API
             full_response = ""
-            tool_calls: Optional[List[ToolCall]] = None
 
             async for chunk in self.client.chat(
                 messages=messages,
@@ -253,38 +252,29 @@ class CLI:
                     full_response += chunk.content
                     self.formatter.format_stream_chunk(chunk.content)
 
-                elif chunk.event == "tool_call" and chunk.tool_call:
-                    # 工具调用
-                    if tool_calls is None:
-                        tool_calls = []
-
-                    # 处理工具调用
-                    tool_call = chunk.tool_call
-                    call = ToolCall(
-                        id=tool_call.get("id", ""),
-                        type=tool_call.get("type", "function"),
-                        function=tool_call.get("function", {})
-                    )
-
-                    # 检查是否已有同名工具调用
-                    existing = next(
-                        (tc for tc in tool_calls if tc.id == call.id),
-                        None
-                    )
-                    if existing:
-                        # 追加参数
-                        if call.function.get("arguments"):
-                            existing.function["arguments"] += call.function["arguments"]
-                        if call.function.get("name"):
-                            existing.function["name"] = call.function["name"]
-                    else:
-                        tool_calls.append(call)
-
             # 换行
             self.formatter.separator()
 
-            # 处理工具调用
-            if tool_calls:
+            # 获取累积的工具调用（从客户端的 stream_handler）
+            tool_calls_data = self.client._stream_handler.get_tool_calls()
+            if tool_calls_data:
+                # 转换为 ToolCall 对象列表
+                tool_calls = [
+                    ToolCall(
+                        id=tc.get("id", ""),
+                        type=tc.get("type", "function"),
+                        function=tc.get("function", {})
+                    )
+                    for tc in tool_calls_data
+                ]
+
+                # 显示工具调用
+                for tool_call in tool_calls:
+                    tool_name = tool_call.function.get("name", "")
+                    arguments = tool_call.function.get("arguments", "{}")
+                    self.formatter.format_tool_call(tool_name, arguments)
+
+                # 执行工具
                 await self._execute_tool_calls(tool_calls)
 
             # 添加助手响应到对话
